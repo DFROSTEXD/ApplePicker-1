@@ -10,7 +10,14 @@ public class HighScore : MonoBehaviour {
     private Text txtCom;  // txtCom is a reference to this GO’s Text component
 
     void Awake () {                                                           // c
-        _UI_TEXT = GetComponent<Text>();                                      // d
+        _UI_TEXT = GetComponent<Text>();
+        
+        // If the PlayerPrefs HighScore already exists, read it
+        if (PlayerPrefs.HasKey("HighScore")) {                                        // a
+            SCORE = PlayerPrefs.GetInt("HighScore");
+        }
+        // Assign the high score to HighScore
+        PlayerPrefs.SetInt("HighScore", SCORE);                                      // d
     }
 
     static public int SCORE {                                                 // e
@@ -26,5 +33,17 @@ public class HighScore : MonoBehaviour {
     static public void TRY_SET_HIGH_SCORE( int scoreToTry ) {                 // h
         if ( scoreToTry <= SCORE ) return; // If scoreToTry is too low, return
         SCORE = scoreToTry;
+    }
+
+    // The following code allows you to easily reset the PlayerPrefs HighScore
+    [Tooltip( "Check this box to reset the HighScore in PlayerPrefs" )]
+    public bool resetHighScoreNow = false;                                           // d
+
+    void OnDrawGizmos() {                                                            // e
+        if ( resetHighScoreNow ) {
+            resetHighScoreNow = false;
+            PlayerPrefs.SetInt( "HighScore", 1000 );
+            Debug.LogWarning( "PlayerPrefs HighScore reset to 1,000." );
+        }
     }
 }
