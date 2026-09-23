@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI; // This line enables use of uGUI classes like Text.        // a
 
 public class Basket : MonoBehaviour {
+    ScoreCounter scoreCounter; // Reference to the ScoreCounter script
     void Start () { 
         // Find a GameObject named ScoreCounter in the Scene Hierarchy
         GameObject scoreGO = GameObject.Find( "ScoreCounter" );         // b

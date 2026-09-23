@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ApplePicker : MonoBehaviour {
      [Header("Inscribed")]                              
@@ -9,7 +10,10 @@ public class ApplePicker : MonoBehaviour {
      public float       basketBottomY  = -14f;
      public float       basketSpacingY = 2f;
 
+     List<GameObject> basketList;
+
      void Start () {
+         basketList = new List<GameObject>();
          for (int i=0; i <numBaskets; i++) {
              GameObject tBasketGO = Instantiate<GameObject>( basketPrefab );
              Vector3 pos = Vector3.zero;
